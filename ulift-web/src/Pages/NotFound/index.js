@@ -10,10 +10,10 @@ import Animation from "../../assets/404.json";
 
 const Header = () => {
   return (
-    <header className="header">
-      <Link to="/" className="header__link">
+    <header className="header--notfound d-flex p-3">
+      <Link to="/" className="mx-auto header__link">
         <img src={Logo} alt="uLift Logo" className="header__logo" />
-        <span className="header__title">uLift</span>
+        <span className="header__title align-middle">uLift</span>
       </Link>
     </header>
   );
@@ -26,16 +26,16 @@ export default function NotFound() {
     animationData: Animation
   };
 
-  const size = "60%";
+  const size = "50%";
 
   return (
     <>
       <Header />
-      <Container fluid="md">
-        <h1 className="content_title">Página não encontrada</h1>
+      <div className="container-fluid">
+        <h1 className="text-center mt-5 mb-5">Página não encontrada</h1>
 
         <Lottie options={defaultOptions} width={size} height={size} />
-      </Container>
+      </div>
     </>
   );
 }
