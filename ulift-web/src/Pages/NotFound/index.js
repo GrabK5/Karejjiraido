@@ -1,10 +1,8 @@
 import React from "react";
-
-import "./styles.css";
-import { Container } from "react-bootstrap";
 import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
 
+import "./styles.css";
 import Logo from "../../assets/logo.svg";
 import Animation from "../../assets/404.json";
 
