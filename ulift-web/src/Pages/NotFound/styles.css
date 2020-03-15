@@ -1,0 +1,33 @@
+.header {
+	background-color: #81C4F4;
+	display: flex;
+	padding: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.header__logo {
+	width: 5rem;
+	height: 5rem;
+}
+
+.header__link {
+	display: flex;
+	align-items: center;
+}
+
+.header__link:hover {
+	text-decoration: none;
+}
+
+.header__title {
+	font-size: 2rem;
+	margin-left: 1rem;
+	color: #004D84;
+}
+
+.content_title {
+	text-align: center;
+	margin: 3rem 0;
+	font-size: 2rem;
+}
