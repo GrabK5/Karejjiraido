@@ -3,7 +3,7 @@ import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
 
 import "./styles.css";
-import Logo from "../../assets/logo.svg";
+import Logo from "../../assets/Logo.svg";
 import Animation from "../../assets/404.json";
 
 const Header = () => {
