@@ -3,7 +3,6 @@ import { useField } from "@unform/core";
 
 export default function Input({ name, ...rest }) {
   const inputRef = useRef(null);
-  // eslint-disable-next-line
   const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {

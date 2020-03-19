@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useField } from "@unform/core";
 
-export default function Select({ name, ...rest }) {
+export default function Select({ name, options, ...rest }) {
   const inputRef = useRef(null);
-  // eslint-disable-next-line
   const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
@@ -16,19 +15,15 @@ export default function Select({ name, ...rest }) {
 
   return (
     <>
-      <select ref={inputRef} {...rest}>
+      <select className="form__select" ref={inputRef} {...rest}>
         <option value="" disabled selected>
           Selecione um campus
         </option>
-        <option value="aimores">Aimorés</option>
-        <option value="contagem">Contagem</option>
-        <option value="cristiano-machado">Cristiano Machado</option>
-        <option value="barreiro">Barreiro</option>
-        <option value="betim">Betim</option>
-        <option value="guajajaras">Guajajaras</option>
-        <option value="joao-pinheiro">João Pinheiro</option>
-        <option value="liberdade">Liberdade</option>
-        <option value="linha-verde">Linha Verde</option>
+        {options.map(item => (
+          <option key={item.label} value={item.value}>
+            {item.label}
+          </option>
+        ))}
       </select>
       {error && (
         <span style={{ color: "#f00", display: "block" }}>{error}</span>

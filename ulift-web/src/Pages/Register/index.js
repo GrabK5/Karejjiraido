@@ -6,8 +6,7 @@ import * as Yup from "yup";
 import "./styles.css";
 import Logo from "../../assets/Logo.svg";
 import RegisterIcon from "../../assets/Register.svg";
-import Input from "../../components/Form/Input";
-import Select from "../../components/Form/Select";
+import InputGroup from "../../components/InputGroup";
 
 export default function Register() {
   const formRef = useRef(null);
@@ -81,66 +80,55 @@ export default function Register() {
         <Form ref={formRef} onSubmit={handleSubmit} className="form">
           <div className="form__content">
             <div className="form__section form__section--right">
-              <div className="form__inputgroup">
-                <label className="form__label">Nome:</label>
-                <Input
-                  name="name"
-                  className=" input__register"
-                  placeholder="Digite seu nome"
-                  type="text"
-                />
-              </div>
-              <div className="form__inputgroup">
-                <label className="form__label">Telefone:</label>
-                <Input
-                  name="telephone"
-                  className=" input__register"
-                  placeholder="Digite seu telefone"
-                  type="number"
-                />
-              </div>
-              <div className="form__inputgroup">
-                <label className="form__label">CNH:</label>
-                <Input
-                  name="cnh"
-                  className="input__register"
-                  type="file"
-                  multiple={false}
-                />
-              </div>
-              <div className="form__inputgroup">
-                <label className="form__label">Campus:</label>
-                <Select className="form__select" name="campus" />
-              </div>
+              <InputGroup
+                name="name"
+                label="Nome"
+                placeholder="Digite seu nome"
+                type="text"
+              />
+              <InputGroup
+                name="telephone"
+                label="Telefone"
+                placeholder="Digite seu telefone"
+                type="number"
+              />
+              <InputGroup label="CNH" name="cnh" type="file" multiple={false} />
+              <InputGroup
+                label="Campus"
+                name="campus"
+                type="select"
+                options={[
+                  { value: "aimores", label: "Aimorés" },
+                  { value: "contagem", label: "Contagem" },
+                  { value: "cristiano-machado", label: "Cristiano Machado" },
+                  { value: "barreiro", label: "Barreiro" },
+                  { value: "betim", label: "Betim" },
+                  { value: "guajajaras", label: "Guajajaras" },
+                  { value: "joao-pinheiro", label: "João Pinheiro" },
+                  { value: "liberdade", label: "Liberdade" },
+                  { value: "guajajaras", label: "Linha Verde" }
+                ]}
+              />
             </div>
             <div className="form__section form__section--left">
-              <div className="form__inputgroup">
-                <label className="form__label">Email:</label>
-                <Input
-                  name="email"
-                  className=" input__register"
-                  placeholder="Digite seu email"
-                  type="email"
-                />
-              </div>
-              <div className="form__inputgroup">
-                <label className="form__label">CPF:</label>
-                <Input
-                  name="cpf"
-                  className=" input__register"
-                  placeholder="Digite seu cpf"
-                  type="number"
-                />
-              </div>
-              <div className="form__inputgroup">
-                <label className="form__label">Foto RA:</label>
-                <Input
-                  name="ra"
-                  className="input__register"
-                  type="file"
-                  multiple={false}
-                />
-              </div>
+              <InputGroup
+                label="Email"
+                name="email"
+                placeholder="Digite seu email"
+                type="email"
+              />
+              <InputGroup
+                label="CPF"
+                name="cpf"
+                placeholder="Digite seu cpf"
+                type="number"
+              />
+              <InputGroup
+                label="Foto RA"
+                name="ra"
+                type="file"
+                multiple={false}
+              />
             </div>
           </div>
           <div className="form__content--btn">
