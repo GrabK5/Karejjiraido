@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import "./styles.css";
 import Logo from "../../assets/Logo.svg";
 import RegisterIcon from "../../assets/Register.svg";
-import InputGroup from "../../components/InputGroup";
+import InputGroup from "../../components/Form/InputGroup";
 
 export default function Register() {
   const formRef = useRef(null);

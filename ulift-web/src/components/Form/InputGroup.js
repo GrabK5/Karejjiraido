@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "./Form/Input";
-import Select from "./Form/Select";
+import Input from "./Input";
+import Select from "./Select";
 
 export default function InputGroup({
   label,
