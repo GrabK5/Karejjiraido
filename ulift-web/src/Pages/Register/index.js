@@ -32,8 +32,23 @@ export default function Register() {
           .typeError("É preciso digitar um CPF")
           .min(11, "Digite um CPF válido")
           .required("Digite um CPF"),
-        ra: Yup.string().required("Envie uma foto de RA")
+        ra: Yup.string().required("Envie uma foto de RA"),
+        password: Yup.string()
+          .required("A senha é obrigatória")
+          .matches(new RegExp(/[A-Za-z0-9]/, "g"), {
+            message: "A senha deve conter somente letras ou números",
+            excludeEmptyString: true
+          }),
+        passwordConfirm: Yup.string().required("Confirme sua senha")
       });
+
+      if (data.passwordConfirm !== data.password) {
+        formRef.current.setErrors({
+          password: "Senhas não conferem",
+          passwordConfirm: "Senhas não conferem"
+        });
+        return;
+      }
 
       await schema.validate(data, {
         abortEarly: false
@@ -94,6 +109,12 @@ export default function Register() {
               />
               <InputGroup label="CNH" name="cnh" type="file" multiple={false} />
               <InputGroup
+                name="password"
+                label="Senha"
+                placeholder="Digite sua senha"
+                type="password"
+              />
+              <InputGroup
                 label="Campus"
                 name="campus"
                 type="select"
@@ -128,6 +149,12 @@ export default function Register() {
                 name="ra"
                 type="file"
                 multiple={false}
+              />
+              <InputGroup
+                name="passwordConfirm"
+                label="Confirme a senha"
+                placeholder="Digite sua senha novamente"
+                type="password"
               />
             </div>
           </div>
