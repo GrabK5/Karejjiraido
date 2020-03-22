@@ -21,7 +21,7 @@ export default function InputGroup({
       <label className="form__label">{label}:</label>
       <Input
         name={name}
-        className=" input__register"
+        className="input__register"
         placeholder={placeholder}
         type={type}
       />
