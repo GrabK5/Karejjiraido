@@ -55,13 +55,10 @@ export default function Register() {
       });
 
       //send to API
-      console.log(data);
       formRef.current.setErrors({});
       reset();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
-        console.log(err);
-
         const errorMessages = {};
 
         err.inner.forEach(error => {
