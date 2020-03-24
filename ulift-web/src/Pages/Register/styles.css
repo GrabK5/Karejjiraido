@@ -1,19 +1,23 @@
+.register {
+	background-color: rgba(98, 101, 104, .1);
+	min-height: 100vh;
+}
+
 .register__header {
+	background-color: #fff;
 	display: flex;
-	margin: 1rem;
+	padding: 1rem;
 }
 
 .register__form {
 	align-items: center;
 	background-image: url('../../assets/background.svg');
-	background-color: rgba(98, 101, 104, .1);
 	background-repeat: no-repeat;
 	background-position: right;
 	background-size: contain;
 	display: flex;
 	flex-direction: column;
 	padding-bottom: 1rem;
-	width: 100%;
 }
 
 .form__header {
@@ -109,17 +113,13 @@
 
 @media (max-width: 768px) { 
 
-	.register {
-		margin-bottom: 1rem;
-		justify-content: center;
-	}
-
  .form__title {
 	 font-size: 1.5rem;
  }
 
 	.register__form {
 		width: 100%;	
+		padding: 0;
 	}
 
 	.register__header {
