@@ -1,0 +1,31 @@
+.first__part {
+    height: 80%;
+    background-color: #81C4F4;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.second__part {
+    height: 50vh;
+    background-color: #ffffff;
+}
+
+.third__part {
+    height: 60vh;
+    background-color: #626568;
+}
+
+.margin__top {
+    margin-top: 100px;
+}
+
+.direction__img {
+    height: 80%;
+    top: -10%;
+}
+
+@media screen and (max-width: 768px) {
+    .first__container {
+        height: 300px;
+    }
+}
