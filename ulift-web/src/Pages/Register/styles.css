@@ -10,13 +10,9 @@
 	background-repeat: no-repeat;
 	background-position: right;
 	background-size: contain;
-	border-radius: 5px;
 	display: flex;
-	height: calc(100vh - 115px);
 	flex-direction: column;
-	margin: auto;
 	padding-bottom: 1rem;
-	width: 50%;
 	width: 100%;
 }
 
@@ -52,9 +48,7 @@
 }
 
 .form__content--btn {
-	display: flex;
 	margin-left: 2rem;
-	justify-content: center;
 	width: 50%;
 }
 
@@ -83,7 +77,6 @@
 
 .form__label {
 	font-size: 1.2rem;
-	display: block;
 }
 
 .form__inputgroup {
@@ -104,12 +97,13 @@
 	border-radius: 5px;
 	color: #fff;
 	font-size: 1.5rem;
-	margin-top: 2rem;
+	margin-top: 2rem;	
 	width: 100%;
 }
 
 .form__button:hover {
 	transition: all .3s;
+	color: #004D84;
 	background-color:  #81C4F4;
 }
 
