@@ -72,7 +72,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="register">
+      <div className="register__header">
         <Link to="/" className="header__link">
           <img className="img-fluid header__logo" src={Logo} alt="uLift Logo" />
           <span className="header__title">uLift</span>
@@ -80,7 +80,7 @@ export default function Register() {
       </div>
 
       <section className="register__form">
-        <div className="register__header">
+        <div className="form__header">
           <img
             className="img-fluid register__logo"
             src={RegisterIcon}

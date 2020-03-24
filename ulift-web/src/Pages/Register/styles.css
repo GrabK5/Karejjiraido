@@ -1,4 +1,4 @@
-.register {
+.register__header {
 	display: flex;
 	margin: 1rem;
 }
@@ -20,7 +20,7 @@
 	width: 100%;
 }
 
-.register__header {
+.form__header {
 	align-items: center;
 	background-color: #004D84;
 	display: flex;
