@@ -1,8 +1,24 @@
-.first__part {
+.direction__img {
     height: 80%;
+    width: 100%;
+    top: -10%;
+    padding: 0;
+    margin: 0;
+}
+
+.first__part {
+    width: 100%;
     background-color: #81C4F4;
-    padding-left: 15%;
-    padding-right: 15%;
+    color: #002642;
+}
+
+.margin__top {
+    margin-top: 100px;
+}
+
+.padding-strict {
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .second__part {
@@ -15,17 +31,17 @@
     background-color: #626568;
 }
 
-.margin__top {
-    margin-top: 100px;
-}
-
-.direction__img {
-    height: 80%;
-    top: -10%;
-}
-
 @media screen and (max-width: 768px) {
     .first__container {
         height: 300px;
+    }
+
+    .second__part {
+        height: 120%;
+    }
+
+    .padding-strict {
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
