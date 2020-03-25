@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import "./styles.css";
 import Logo from "../../assets/Logo.svg";
 import RegisterIcon from "../../assets/Register.svg";
+import InputFile from "../../components/Form/IputFile";
 import InputGroup from "../../components/Form/InputGroup";
 
 export default function Register() {
@@ -141,12 +142,10 @@ export default function Register() {
                 placeholder="Digite seu cpf"
                 type="number"
               />
-              <InputGroup
-                label="Foto RA"
-                name="ra"
-                type="file"
-                multiple={false}
-              />
+              <div className="form__inputgroup">
+                <label className="form__label">Foto RA:</label>
+                <InputFile name="ra" />
+              </div>
               <InputGroup
                 name="passwordConfirm"
                 label="Confirme a senha"
