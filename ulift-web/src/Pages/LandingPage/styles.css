@@ -47,9 +47,25 @@
 
 .first__part {
     height: 80%;
+    width: 100%;
+    top: -10%;
+    padding: 0;
+    margin: 0;
+}
+
+.first__part {
+    width: 100%;
     background-color: #81C4F4;
-    padding-left: 15%;
-    padding-right: 15%;
+    color: #002642;
+}
+
+.margin__top {
+    margin-top: 100px;
+}
+
+.padding-strict {
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .second__part {
