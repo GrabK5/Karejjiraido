@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/index";
 import NotFound from "./Pages/NotFound";
 import Register from "./Pages/Register";
+import Chat from "./Pages/Chat";
 import Login from "./Pages/Login";
 import Forgot from "./Pages/Forgot";
 
