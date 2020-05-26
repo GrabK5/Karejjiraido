@@ -8,7 +8,7 @@ import Dinheiro from "./../../assets/Dinheiro.svg"
 import Tempo from "./../../assets/Tempo.svg"
 import Group from "./../../assets/Group.svg"
 
-function App() {
+function LandingPage() {
   return (
     <>
       <div className="parts">
@@ -114,4 +114,4 @@ function App() {
   );
 }
 
-export default App;
+export default LandingPage;
