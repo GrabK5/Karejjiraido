@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 import "./styles.css"
 import Direction from "./../../assets/Direction.svg"
@@ -11,7 +12,7 @@ function App() {
   return (
     <>
       <div className="parts">
-        <div className="first__part padding-strict pt-4">
+        <div className="first__part pt-4">
           <div className="container margins">
             <div className="row">
               <h1 className="text-center font-weight-bold">
@@ -24,8 +25,12 @@ function App() {
                 <h3>Uma plataforma de fácil uso, para estudantes conseguirem uma carona de acordo com sua localização.</h3>
               </div>
 
-              <div className="col-12 col-lg-4 text-center">
-                <img className="images image-direction" src={Direction} alt="Caronas" />
+              <div className="col-12 col-lg-4 text-center h-100">
+                <img
+                  className="images image__direction"
+                  src={Direction}
+                  alt="Caronas"
+                />
               </div>
             </div>
           </div>
@@ -39,19 +44,31 @@ function App() {
               </div>
 
               <div className="col-12 col-lg-4">
-                <img className="images" src={Tempo} alt="Tempo" />
+                <img
+                  className="images"
+                  src={Tempo}
+                  alt="Tempo"
+                />
 
                 <h4 className="pt-4 pb-0">Otimizar seu tempo</h4>
               </div>
 
               <div className="col-12 col-lg-4">
-                <img className="images" src={Pessoas} alt="Pessoas" />
+                <img
+                  className="images"
+                  src={Pessoas}
+                  alt="Pessoas"
+                />
 
                 <h4 className="pt-4 pb-0">Conhecer novas pessoas</h4>
               </div>
 
               <div className="col-12 col-lg-4">
-                <img className="images" src={Dinheiro} alt="Dinheiro" />
+                <img
+                  className="images"
+                  src={Dinheiro}
+                  alt="Dinheiro"
+                  />
 
                 <h4 className="pt-4 pb-0">Economizar algum dinheiro</h4>
               </div>
@@ -60,22 +77,35 @@ function App() {
         </div>
 
 
-        <div className="third__part padding-strict">
-          <div className="container text-center">
-            <div className="row margins">
-              <div className="col-12">
-                <img className="images image__Group" src={Group} alt="Carro ao luar" />
-              </div>
+        <div className="third__part">
+          <div className="container text-center padding-strict margins">
+            <div className="col-12 h-100 pb-3">
+              <img
+                className="images image__group"
+                src={Group}
+                alt="Carro ao luar"
+              />
+            </div>
 
-              <div className="col-12 text-white">
-                <h2>Você também pode oferecer caronas e economizar no seu combustível.</h2>
+            <div className="col-12 text-center text-white">
+              <h3>Você também pode oferecer caronas e economizar no seu combustível.</h3>
 
-                <button className="col-12 col-xl-6 btn btn-lg btn-light font-weight-bold primary__button">
+              <Link to="/register">
+                <button className="col-12 col-md-6 btn btn-lg btn-light font-weight-bold mt-4">
                   Começar a esperiencia
                 </button>
+              </Link>
 
-                <h5 className="pt-3">Já possui conta? <a className="sign-link text-decoration-none" href="#">Entrar</a></h5>
-              </div>
+              <h6 className="pt-3">
+                Já possui conta?
+
+                <Link
+                  to="/login"
+                  className="sign-link text-decoration-none"
+                >
+                  Entrar
+                </Link>
+              </h6>
             </div>
           </div>
         </div>
