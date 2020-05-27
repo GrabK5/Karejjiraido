@@ -9,19 +9,17 @@ import io from 'socket.io-client';
 
 export default function Chat() {
 const socket = io(window.location.hostname+":4000");
-const [users, setUsers] = useState([]);
+//const [users, setUsers] = useState([]);
 
 const formRef = useRef(null);
 
-async function login(data){
+async function login(data, { reset }){
   socket.emit("login", data.name, (callback) =>{
     console.log(callback)
-  })
+  });
+  reset();
 }
-socket.on("user_update", (dados)=> {
-	setUsers(dados);
-	console.log(dados);
-})
+
   return (
     <>
       <Header />
@@ -40,9 +38,13 @@ socket.on("user_update", (dados)=> {
       </Form>
       </div>
 	  <div id='lista'>
-    {users.map(id => (
-       <li key={id}>{id}</li>
-    ))}
+    {
+      socket.on("user_update", (dados) => {
+        dados.array.forEach(element => (
+          <li key={element}>{element}</li>
+        ));
+      })
+    }
 	  </div>
     </>
   );

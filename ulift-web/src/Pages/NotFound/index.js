@@ -19,6 +19,9 @@ export default function NotFound() {
       <Header />
       <div className="container-fluid">
         <h1 className="text-center mt-5 mb-5">Página não encontrada</h1>
+        <p className="text-center">
+          Retorne a página inicial e encontre a opção que está procurando.
+        </p>
 
         <Lottie options={defaultOptions} width={size} height={size} />
       </div>
