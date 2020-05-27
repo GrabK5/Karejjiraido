@@ -3,13 +3,14 @@ import { Form } from "@unform/web";
 import { Link } from "react-router-dom";
 
 import "./styles.css";
+import avatar from "./avatar.png"
 import Header from "../../components/Header";
 import InputGroup from "../../components/Form/InputGroup";
 import io from 'socket.io-client';
 
 export default function Chat() {
 const socket = io(window.location.hostname+":4000");
-//const [users, setUsers] = useState([]);
+const [users, setUsers] = useState([]);
 
 const formRef = useRef(null);
 
@@ -19,6 +20,10 @@ async function login(data, { reset }){
   });
   reset();
 }
+socket.on("user_update", (dados)=> {
+	setUsers(dados);
+	console.log(dados);
+})
 
   return (
     <>
@@ -38,13 +43,11 @@ async function login(data, { reset }){
       </Form>
       </div>
 	  <div id='lista'>
-    {
-      socket.on("user_update", (dados) => {
-        dados.array.forEach(element => (
-          <li key={element}>{element}</li>
-        ));
-      })
-    }
+		 <div id='lista'>
+			{users.map(id => (
+				<li key={id}>{id}</li>
+			))}
+		</div>
 	  </div>
     </>
   );
