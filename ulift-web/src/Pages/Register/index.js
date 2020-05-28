@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Form } from "@unform/web";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 
 import "./styles.css";
@@ -8,9 +8,14 @@ import Logo from "../../assets/Logo.svg";
 import RegisterIcon from "../../assets/Register.svg";
 import InputFile from "../../components/Form/IputFile";
 import InputGroup from "../../components/Form/InputGroup";
+import api from '../../services/api';
 
 export default function Register() {
   const formRef = useRef(null);
+  const [error, setError] = useState(false);
+  const [apiMessage, setApiMessage] = useState('');
+
+  const history = useHistory();
 
   async function handleSubmit(data, { reset }) {
     try {
@@ -55,7 +60,16 @@ export default function Register() {
         abortEarly: false
       });
 
-      //send to API
+      const response = await api.post('v1/users', data);
+
+      if (!response.data.user) {
+        setError(true);
+        setApiMessage(response.data.error)
+        return;
+      }
+
+      history.push('/login');
+
       formRef.current.setErrors({});
       reset();
     } catch (err) {
@@ -158,6 +172,15 @@ export default function Register() {
             <button className="form__button" type="submit">
               Cadastrar
             </button>
+            { error && 
+              <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+                <span style={{ 
+                  color: "#e74c3c", fontWeight: 'bold', 
+                }}>
+                  {apiMessage.toUpperCase()}
+                </span> 
+              </div>
+            }
           </div>
         </Form>
       </section>
