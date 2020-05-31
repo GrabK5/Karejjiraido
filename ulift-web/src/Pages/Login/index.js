@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import ReactLoading from 'react-loading';
+import io from 'socket.io-client';
 
 import "./styles.css";
 import Logo from "../../assets/Logo.svg";
@@ -11,6 +12,9 @@ export default function Login() {
   const passwordRef = useRef(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const host = `ws://${window.location.hostname}:4000`;
+  const socket = useState(io(host, { transports: ['websocket'] }))[0];
 
   const history = useHistory();
 
@@ -33,6 +37,22 @@ export default function Login() {
     }
     
     localStorage.setItem('@ulift', response.data.token);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const user = {
+        id: localStorage.getItem("@ulift"),
+        name: response.data.name,
+        location: {
+          lat: position.coords.latitude,
+          long: position.coords.longitude
+        }
+      }
+
+      socket.emit("login", user, (callback) => {
+        console.log(callback, user);
+      });
+    });
+
     history.push('/dashboard');
   }
 
