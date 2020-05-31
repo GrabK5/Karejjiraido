@@ -1,0 +1,13 @@
+.panel {
+  border-color: #7B886B !important;
+  max-width: 390px;
+}
+
+.panel h1 {
+  font-size: 1.4rem;
+}
+
+.panel img.img-fluid {
+  width: 70px;
+  height: 70px;
+}
