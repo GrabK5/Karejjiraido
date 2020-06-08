@@ -1,18 +1,59 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import ReactLoading from 'react-loading';
+import io from 'socket.io-client';
 
 import "./styles.css";
 import Logo from "../../assets/Logo.svg";
+import api from "../../services/api";
 
 export default function Login() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e) {
+  const host = `ws://${window.location.hostname}:4000`;
+  const socket = useState(io(host, { transports: ['websocket'] }))[0];
+
+  const history = useHistory();
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+
+    setLoading(true)
+    const response = await api.post("v1/sessions", {
+      email,
+      password
+    });
+    setLoading(false);
+
+    if (!response.data.token) {
+      setError(true);
+      return;
+    }
+    
+    localStorage.setItem('@ulift', response.data.token);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      const user = {
+        id: localStorage.getItem("@ulift"),
+        name: response.data.name,
+        location: {
+          lat: position.coords.latitude,
+          long: position.coords.longitude
+        }
+      }
+
+      socket.emit("login", user, (callback) => {
+        console.log(callback, user);
+      });
+    });
+
+    history.push('/dashboard');
   }
 
   return (
@@ -50,6 +91,20 @@ export default function Login() {
               Esqueci minha senha
             </Link>
           </div>
+
+          {loading && (
+            <div style={{ alignSelf: 'center' }}>
+              <ReactLoading color="#004d84" type="bubbles" />
+            </div>
+          )}
+
+          { error && (
+            <span style={{ 
+              color: "#e74c3c", fontWeight: 'bold', textAlign: 'center' 
+            }}>
+              Login incorreto, tente novamente.
+            </span>
+          )}
         </form>
       </section>
     </main>
