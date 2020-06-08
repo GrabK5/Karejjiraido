@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage/index";
 import NotFound from "./Pages/NotFound";
 import Register from "./Pages/Register";
+import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import Forgot from "./Pages/Forgot";
 
@@ -14,6 +15,7 @@ const Routes = () => {
         <Route component={LandingPage} exact={true} path="/" />
         <Route component={Register} path="/register" />
         <Route component={Login} path="/login" />
+        <Route component={Dashboard} path="/dashboard" />
         <Route component={Forgot} path="/forgot" />
         <Route component={NotFound} />
       </Switch>
