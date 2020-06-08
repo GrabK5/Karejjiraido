@@ -76,7 +76,6 @@ function LandingPage() {
           </div>
         </div>
 
-
         <div className="third__part">
           <div className="container text-center padding-strict margins">
             <div className="col-12 h-100 pb-3">
