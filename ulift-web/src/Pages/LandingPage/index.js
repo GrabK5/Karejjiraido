@@ -22,7 +22,7 @@ function LandingPage() {
 
             <div className="margin__top row d-flex justify-content-center">
               <div className="col-12 col-lg-6 text-justify">
-                <h3>Uma plataforma de fácil uso, para estudantes conseguirem uma carona de acordo com sua localização.</h3>
+                <h3>Uma plataforma de fácil uso, para estudantes conseguirem carona de acordo com sua localização.</h3>
               </div>
 
               <div className="col-12 col-lg-4 text-center h-100">
@@ -92,7 +92,7 @@ function LandingPage() {
 
               <Link to="/register">
                 <button className="col-12 col-md-6 btn btn-lg btn-light font-weight-bold mt-4">
-                  Começar a esperiencia
+                  Começar a experiência
                 </button>
               </Link>
 
