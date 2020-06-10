@@ -23,7 +23,7 @@ export default function Register() {
         name: Yup.string()
           .min(3, "Digite um nome válido")
           .required("Nome é obrigatório"),
-        telephone: Yup.number()
+        phone: Yup.number()
           .typeError("É preciso digitar um número")
           .min(9, "Digite um telefone válido")
           .required("Digite um telefone"),
@@ -114,7 +114,7 @@ export default function Register() {
                 type="text"
               />
               <InputGroup
-                name="telephone"
+                name="phone"
                 label="Telefone"
                 placeholder="Digite seu telefone"
                 type="number"
