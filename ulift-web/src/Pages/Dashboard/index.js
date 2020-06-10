@@ -8,7 +8,7 @@ import Haversine from '../../util/Haversine';
 
 const mapStyles = {
   width: '100%',
-  height: '70%'
+  height: '100%'
 };
 
 const Dashboard = props => {
@@ -86,16 +86,25 @@ const Dashboard = props => {
   return (
     <>
       <Header />
+	  <div class="d-flex" id="wrapper">
+
+		
+		<div class="bg-light border-right" id="sidebar-wrapper">
+		  <div class="sidebar-heading">Start Bootstrap </div>
+		  <div class="list-group list-group-flush">
+			{users.map(user => (
+				<a href="#" class="list-group-item list-group-item-action bg-light" key={user.id}>
+				  {`${user.name} - distance: ${calculateDistance(user) / 1000} km`}
+				</a>
+			))}
+			<a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+		  </div>
+		</div>
+	
       <div>
-        <div id='lista'>
-          {users.map(user => (
-            <li key={user.id}>
-              {`${user.name} - distance: ${calculateDistance(user) / 1000} km`}
-            </li>
-          ))}
-        </div>
         {renderMap()}
       </div>
+	  </div>
     </>
   );
 }
