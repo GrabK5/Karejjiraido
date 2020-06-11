@@ -34,7 +34,7 @@ export default function Register() {
         email: Yup.string()
           .email("Digite um email válido")
           .required("Email é obrigatório"),
-        cpf: Yup.number()
+        cpf: Yup.string()
           .typeError("É preciso digitar um CPF")
           .min(11, "Digite um CPF válido")
           .required("Digite um CPF"),
@@ -60,9 +60,21 @@ export default function Register() {
         abortEarly: false
       });
 
-      const response = await api.post('v1/users', data);
+      let formData = new FormData();
 
-      if (!response.data.user) {
+      Object.keys(data).forEach((field) => {
+        formData.append(field, data[field]);
+      });
+
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+
+      const response = await api.post('v1/users', formData, config);
+
+      if (!response.data.id) {
         setError(true);
         setApiMessage(response.data.error)
         return;
@@ -119,7 +131,10 @@ export default function Register() {
                 placeholder="Digite seu telefone"
                 type="number"
               />
-              <InputGroup label="CNH" name="cnh" type="file" multiple={false} />
+              <div className="form__inputgroup">
+                <label className="form__label">Foto CNH:</label>
+                <InputFile name="cnh" />
+              </div>
               <InputGroup
                 name="password"
                 label="Senha"
@@ -154,7 +169,7 @@ export default function Register() {
                 label="CPF"
                 name="cpf"
                 placeholder="Digite seu cpf"
-                type="number"
+                type="text"
               />
               <div className="form__inputgroup">
                 <label className="form__label">Foto RA:</label>
@@ -172,13 +187,13 @@ export default function Register() {
             <button className="form__button" type="submit">
               Cadastrar
             </button>
-            { error && 
+            {error &&
               <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                <span style={{ 
-                  color: "#e74c3c", fontWeight: 'bold', 
+                <span style={{
+                  color: "#e74c3c", fontWeight: 'bold',
                 }}>
                   {apiMessage.toUpperCase()}
-                </span> 
+                </span>
               </div>
             }
           </div>
