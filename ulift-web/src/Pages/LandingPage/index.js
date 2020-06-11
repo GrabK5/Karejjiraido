@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 import "./styles.css"
+import Navbar from "./../../components/Navbar"
 import Direction from "./../../assets/Direction.svg"
 import Pessoas from "./../../assets/Pessoas.svg"
 import Dinheiro from "./../../assets/Dinheiro.svg"
@@ -11,6 +12,10 @@ import Group from "./../../assets/Group.svg"
 function LandingPage() {
   return (
     <>
+      <Navbar
+        bgColor='white'
+      />
+
       <div className="parts">
         <div className="first__part pt-4">
           <div className="container margins">
