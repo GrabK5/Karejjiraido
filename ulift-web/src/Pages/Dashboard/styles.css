@@ -5,3 +5,6 @@
 .content_title {
 	font-size: 2rem;
 }
+#sidebar-wrapper {
+	min-width: 200px;
+}
