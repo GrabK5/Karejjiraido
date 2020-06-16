@@ -83,6 +83,9 @@ const Dashboard = props => {
     }
     return null;
   }
+  function request(re){
+    console.log(re)
+  }
 
   return (
     <>
@@ -98,7 +101,7 @@ const Dashboard = props => {
         </div>
         <div class="media-body">
           <h4 class="media-heading"></h4>
-          <p>Dar Carona <checkbox></checkbox></p>
+          <p>Dar Carona</p>
         </div>
       </div>
       </div>
@@ -111,7 +114,7 @@ const Dashboard = props => {
 			  <div class="media-body">
 				<h5 class="mt-0">{user.name}</h5>
         
-				{`distance: ${calculateDistance(user) / 1000} km`}
+				<a href='#' onClick={request(user.id)}>{`distance: ${calculateDistance(user) / 1000} km`}</a>
 			  </div>
 			</div>
 			))}
