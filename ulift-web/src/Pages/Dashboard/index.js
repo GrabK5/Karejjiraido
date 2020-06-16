@@ -11,7 +11,8 @@ import Logo from "../../assets/Logo.svg"
 
 const mapStyles = {
   width: '100%',
-  height: '100%'
+  height: '100%',
+  overflow:"auto"
 };
 
 const Dashboard = props => {
