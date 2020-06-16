@@ -7,6 +7,8 @@ import "./styles.css";
 import Header from "../../components/Header";
 import Haversine from '../../util/Haversine';
 
+import Logo from "../../assets/Logo.svg"
+
 const mapStyles = {
   width: '100%',
   height: '100%'
@@ -114,7 +116,7 @@ const Dashboard = props => {
 			  <div class="media-body">
 				<h5 class="mt-0">{user.name}</h5>
         
-				<a href='#' onClick={request(user.id)}>{`distance: ${calculateDistance(user) / 1000} km`}</a>
+				<a href='#' onClick={request(user.id)}><img src={Logo} height='20px'></img>{`distance: ${calculateDistance(user) / 1000} km`} </a>
 			  </div>
 			</div>
 			))}
