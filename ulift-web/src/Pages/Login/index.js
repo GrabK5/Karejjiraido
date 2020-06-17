@@ -37,8 +37,9 @@ export default function Login() {
     }
     
     localStorage.setItem('@ulift', response.data.token);
+    localStorage.setItem('@ulift-name', response.data.name);
 
-    navigator.geolocation.getCurrentPosition((position) => {
+    /*navigator.geolocation.getCurrentPosition((position) => {
       const user = {
         id: localStorage.getItem("@ulift"),
         name: response.data.name,
@@ -51,7 +52,7 @@ export default function Login() {
       socket.emit("login", user, (callback) => {
         console.log(callback, user);
       });
-    });
+    });*/
 
     history.push('/dashboard');
   }
