@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import ReactLoading from 'react-loading';
 import io from 'socket.io-client';
@@ -14,7 +14,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const host = `ws://${window.location.hostname}:4000`;
-  const socket = useState(io(host, { transports: ['websocket'] }))[0];
+  const [socket, setSocket] = useState(null);
+
+  useEffect(function () {
+    setSocket(io.connect(host, { transports: ['websocket'] }));
+  }, []);
 
   const history = useHistory();
 
@@ -35,7 +39,7 @@ export default function Login() {
       setError(true);
       return;
     }
-    
+
     localStorage.setItem('@ulift', response.data.token);
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -48,12 +52,14 @@ export default function Login() {
         }
       }
 
-      socket.emit("login", user, (callback) => {
-        console.log(callback, user);
-      });
+      if (socket) {
+        socket.emit("login", user, (callback) => {
+          console.log(callback, user);
+        });
+      }
     });
 
-    history.push('/dashboard');
+    history.push({ pathname: "/dashboard" });
   }
 
   return (
@@ -98,9 +104,9 @@ export default function Login() {
             </div>
           )}
 
-          { error && (
-            <span style={{ 
-              color: "#e74c3c", fontWeight: 'bold', textAlign: 'center' 
+          {error && (
+            <span style={{
+              color: "#e74c3c", fontWeight: 'bold', textAlign: 'center'
             }}>
               Login incorreto, tente novamente.
             </span>

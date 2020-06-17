@@ -12,7 +12,7 @@ const mapStyles = {
 };
 
 const Dashboard = props => {
-  const host = `ws://${window.location.hostname}:3000`;
+  const host = `ws://${window.location.hostname}:4000`;
   const socket = useState(io(host, { transports: ['websocket'] }))[0];
   const [users, setUsers] = useState([]);
   const [position, setPosition] = useState(null);
