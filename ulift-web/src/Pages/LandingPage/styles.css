@@ -24,9 +24,13 @@
 }
 
 .first__part {
-    width: 100%;
     background-color: #81C4F4;
     color: #002642;
+    height: 80%;
+    width: 100%;
+    top: -10%;
+    padding: 0;
+    margin: 0;
 }
 
 .images {
@@ -43,20 +47,6 @@
 
 .image__group {
     max-height: 250px !important;
-}
-
-.first__part {
-    height: 80%;
-    width: 100%;
-    top: -10%;
-    padding: 0;
-    margin: 0;
-}
-
-.first__part {
-    width: 100%;
-    background-color: #81C4F4;
-    color: #002642;
 }
 
 .margin__top {
@@ -83,7 +73,7 @@
 }
 
 .margins {
-    padding-top: 50px;
+    padding-top: 80px;
     padding-bottom: 50px;
 }
 

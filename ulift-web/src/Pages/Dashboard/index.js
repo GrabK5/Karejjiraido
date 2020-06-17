@@ -38,6 +38,23 @@ const Dashboard = props => {
   });
 });
 
+  const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+  const [activeMarker, setActiveMarker] = useState({});
+  const [selectedUser, setSelectedUser] = useState({});
+
+  const onMarkerClick = (prop, marker, e) => {
+    setSelectedUser(prop);
+    setActiveMarker(marker);
+    setShowingInfoWindow(true);
+  }
+
+  const onClose = (prop) => {
+    if (showingInfoWindow) {
+      setShowingInfoWindow(false);
+      setActiveMarker(null);
+    }
+  }
+
   const updateLocation = (pos) => {
     const location = {
       lat: pos.coords.latitude,
@@ -65,10 +82,15 @@ const Dashboard = props => {
   const displayUsersMarkers = () => {
     if (position) {
       return users.map((user) => {
-        return(<Marker key={user.id} position={{
-          lat: user.location.lat,
-          lng: user.location.long,
-        }} />);
+        return (
+          <Marker key={user.id} position={{
+            lat: user.location.lat,
+            lng: user.location.long,
+          }}
+            name={user.name}
+            onClick={onMarkerClick}
+          />
+        );
       });
     }
 
@@ -76,30 +98,64 @@ const Dashboard = props => {
   };
 
   const displayMyMarker = () => {
-    return(<Marker key={localStorage.getItem("@ulift")} position={{
-      lat: position.lat,
-      lng: position.long,
-    }} />)
+    return (
+      <Marker key={localStorage.getItem("@ulift")} position={{
+        lat: position.lat,
+        lng: position.long,
+      }}
+        name={"Você"}
+        onClick={onMarkerClick}
+      />
+    );
   }
 
   if(socket)socket.on("user_update", (data) => {
     setUsers(data);
   });
 
+  function userBox() {
+    if (selectedUser.name === "Você") {
+      return <div>{selectedUser.name}</div>
+    }
+
+    return (
+      <span>
+        <span className="font-weight-bold">
+          {selectedUser.name}
+        </span>
+        &nbsp;
+        <button
+          className="btn font-weight-bold"
+          style={{ backgroundColor: "#81c4f4" }}>
+          Solicitar carona
+        </button>
+      </span>
+    );
+  }
+
   const renderMap = () => {
     if (position !== null) {
-      return (<Map
-        google={props.google}
-        zoom={15}
-        style={mapStyles}
-        initialCenter={{
-          lat: position.lat,
-          lng: position.long,
-        }}
-      >
-        {displayMyMarker()}
-        {displayUsersMarkers()}
-      </Map>)
+      return (
+        <Map
+          google={props.google}
+          zoom={15}
+          style={mapStyles}
+          initialCenter={{
+            lat: position.lat,
+            lng: position.long,
+          }}
+        >
+          {displayMyMarker()}
+          {displayUsersMarkers()}
+          <InfoWindow
+            marker={activeMarker}
+            visible={showingInfoWindow}
+            onClose={onClose}
+          >
+            {userBox()}
+          </InfoWindow>
+        </Map>
+      );
     }
     return null;
   }
