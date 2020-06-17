@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import io from 'socket.io-client';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 import "./styles.css";
 import Header from "../../components/Header";
@@ -12,10 +12,27 @@ const mapStyles = {
 };
 
 const Dashboard = props => {
-  const host = `ws://${window.location.hostname}:4000`;
+  const host = `ws://${window.location.hostname}:3000`;
   const socket = useState(io(host, { transports: ['websocket'] }))[0];
   const [users, setUsers] = useState([]);
   const [position, setPosition] = useState(null);
+
+  const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+  const [activeMarker, setActiveMarker] = useState({});
+  const [selectedUser, setSelectedUser] = useState({});
+
+  const onMarkerClick = (prop, marker, e) => {
+    setSelectedUser(prop);
+    setActiveMarker(marker);
+    setShowingInfoWindow(true);
+  }
+
+  const onClose = (prop) => {
+    if (showingInfoWindow) {
+      setShowingInfoWindow(false);
+      setActiveMarker(null);
+    }
+  }
 
   const updateLocation = (pos) => {
     const location = {
@@ -44,10 +61,15 @@ const Dashboard = props => {
   const displayUsersMarkers = () => {
     if (position) {
       return users.map((user) => {
-        return(<Marker key={user.id} position={{
-          lat: user.location.lat,
-          lng: user.location.long,
-        }} />);
+        return (
+          <Marker key={user.id} position={{
+            lat: user.location.lat,
+            lng: user.location.long,
+          }}
+            name={user.name}
+            onClick={onMarkerClick}
+          />
+        );
       });
     }
 
@@ -55,10 +77,15 @@ const Dashboard = props => {
   };
 
   const displayMyMarker = () => {
-    return(<Marker key={localStorage.getItem("@ulift")} position={{
-      lat: position.lat,
-      lng: position.long,
-    }} />)
+    return (
+      <Marker key={localStorage.getItem("@ulift")} position={{
+        lat: position.lat,
+        lng: position.long,
+      }}
+        name={"Você"}
+        onClick={onMarkerClick}
+      />
+    );
   }
 
   socket.on("user_update", (data) => {
@@ -67,18 +94,27 @@ const Dashboard = props => {
 
   const renderMap = () => {
     if (position !== null) {
-      return (<Map
-        google={props.google}
-        zoom={15}
-        style={mapStyles}
-        initialCenter={{
-          lat: position.lat,
-          lng: position.long,
-        }}
-      >
-        {displayMyMarker()}
-        {displayUsersMarkers()}
-      </Map>)
+      return (
+        <Map
+          google={props.google}
+          zoom={15}
+          style={mapStyles}
+          initialCenter={{
+            lat: position.lat,
+            lng: position.long,
+          }}
+        >
+          {displayMyMarker()}
+          {displayUsersMarkers()}
+          <InfoWindow
+            marker={activeMarker}
+            visible={showingInfoWindow}
+            onClose={onClose}
+          >
+            {selectedUser.name}
+          </InfoWindow>
+        </Map>
+      );
     }
     return null;
   }
