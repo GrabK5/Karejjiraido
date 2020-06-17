@@ -92,6 +92,26 @@ const Dashboard = props => {
     setUsers(data);
   });
 
+  function userBox() {
+    if (selectedUser.name === "Você") {
+      return <div>{selectedUser.name}</div>
+    }
+
+    return (
+      <span>
+        <span className="font-weight-bold">
+          {selectedUser.name}
+        </span>
+        &nbsp;
+        <button
+          className="btn font-weight-bold"
+          style={{ backgroundColor: "#81c4f4" }}>
+          Solicitar carona
+        </button>
+      </span>
+    );
+  }
+
   const renderMap = () => {
     if (position !== null) {
       return (
@@ -111,7 +131,7 @@ const Dashboard = props => {
             visible={showingInfoWindow}
             onClose={onClose}
           >
-            {selectedUser.name}
+            {userBox()}
           </InfoWindow>
         </Map>
       );
