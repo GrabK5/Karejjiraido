@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Ride from "../../assets/ride.svg";
@@ -16,9 +16,10 @@ const mapStyles = {
 
 const Dashboard = props => {
   const host = `ws://${window.location.hostname}:4000`;
-  const socket = useState(io(host, { transports: ['websocket'] }))[0];
+  const [socket, setSocket] = useState(null);
   const [users, setUsers] = useState([]);
   const [position, setPosition] = useState(null);
+  useEffect(() => {setSocket(io(host, { transports: ['websocket'] }))}, []);
 
   const updateLocation = (pos) => {
     const location = {
@@ -29,7 +30,7 @@ const Dashboard = props => {
     setPosition(location);
     const id = localStorage.getItem("@ulift");
     const user = { id, location }
-    socket.emit("send_location", user);
+	if(socket)socket.emit("send_location", user);
   }
 
   const calculateDistance = user => {
@@ -64,7 +65,7 @@ const Dashboard = props => {
     }} />)
   }
 
-  socket.on("user_update", (data) => {
+  if(socket)socket.on("user_update", (data) => {
     setUsers(data);
   });
 
@@ -85,9 +86,16 @@ const Dashboard = props => {
     }
     return null;
   }
-  function request(re){
-    console.log(re)
+  function request(id){
+	const sender = localStorage.getItem("@ulift");
+    socket.emit("lift_request", { To_id : id, Sender_id : sender }, (t)=>{
+		console.log(t);
+	})
   }
+  if(socket)socket.on("lift_response", function(request){
+	  console.log(request)
+  })
+  
 
   return (
     <>
