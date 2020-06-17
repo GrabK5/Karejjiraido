@@ -11,9 +11,8 @@ import Logo from "../../assets/Logo.svg"
 
 const mapStyles = {
   width: '100%',
-  height: '100%',
-  overflow:"auto"
-};
+  height: '100%'
+};;
 
 const Dashboard = props => {
   const host = `ws://${window.location.hostname}:4000`;
@@ -117,7 +116,7 @@ const Dashboard = props => {
 			  <div class="media-body">
 				<h5 class="mt-0">{user.name}</h5>
         
-				<a href='#' onClick={request(user.id)}><img src={Logo} height='20px'></img>{`distance: ${calculateDistance(user) / 1000} km`} </a>
+				<a href='#' onClick={() => request(user.id)}><img src={Logo} height='20px'></img>{`distance: ${calculateDistance(user) / 1000} km`} </a>
 			  </div>
 			</div>
 			))}
