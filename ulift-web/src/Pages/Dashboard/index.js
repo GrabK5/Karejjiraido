@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import io from 'socket.io-client';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import Ride from "../../assets/ride.svg";
 
 import "./styles.css";
@@ -160,13 +160,15 @@ const Dashboard = props => {
     return null;
   }
   function request(id){
-	const sender = localStorage.getItem("@ulift");
-    socket.emit("lift_request", { To_id : id, Sender_id : sender }, (t)=>{
+    var s_id = localStorage.getItem("@ulift");
+    var name = localStorage.getItem("@ulift-name");
+    socket.emit("lift_request", { To_id : id, Sender_id: s_id, Sender_name: name }, (t)=>{
 		console.log(t);
 	})
-  }
+	}
   if(socket)socket.on("lift_response", function(request){
-	  console.log(request)
+	  if(document.getElementById('driver-check').checked == true){window.confirm("O "+request.Sender_name+" pediu carona");}
+		  
   })
   
 

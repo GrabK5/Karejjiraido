@@ -19,5 +19,6 @@ body {
 }
 #driver-check{
 	margin-left:10px;
-	margin-top: 7px
+	margin-top: 7px;
+	size: 20px;
 }
